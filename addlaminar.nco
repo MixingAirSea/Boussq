@@ -1,0 +1,11 @@
+// reorder Spatial dimensions (NCO)
+// ncpdq -a t,Z,Y,X -d t,0,0,1 in.nc out.nc
+//
+// add mean flow (NCO)
+// all variables are must be explicitly stated or they are dropped
+// ncap2 -v -s 't=t;X=X;Y=Y;Z=Z;U=u+Z;V=V;W=W;B=b+Z;Re=Re;Pr=Pr;Ri=Ri;Lz=Lz' test.nc test2.nc
+//
+// make vapor file (My script, uses vdfcreate and ncdf2vdf)
+// convertnc2vdf.sh -x 256 -y 32 -z 96 -n 1 -b B -i test2.nc -o test2.vdf
+//
+

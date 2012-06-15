@@ -447,9 +447,10 @@
 
         do i=1,Ny
          do j=1,ax
-          workcol(1:Nz,i,j) = ucol(1:Nz,i,j)*(ucol(1:Nz,i,j)+z(1:Nz))
+          workcol(1:Nz,i,j) = (ucol(1:Nz,i,j)+z(1:Nz))
          enddo
         enddo
+        workcol = workcol*workcol
         call fwdcosz(workcol)
         call col2row(workcol,workrow)
         call fwdxyfft(workrow,uzufro)

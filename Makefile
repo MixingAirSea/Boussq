@@ -25,12 +25,7 @@ FLIB        = -L$(MYLOC)/lib -lfftw3 -lnetcdf -lnetcdff -lhdf5 -lhdf5_hl -lz -lm
 
 #-----------------------------------------------------------------
 
-all : mpiffttest threedfluid
-
-#------------------------------------------------------------------
-
-mpiffttest : colrow.o mpiffttest.o
-	$(FC) colrow.o mpiffttest.o $(FFLAGS) $(FINC) $(FLIB) -o mpiffttest
+all : threedfluid
 
 #------------------------------------------------------------------
 

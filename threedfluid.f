@@ -6,7 +6,7 @@
        character(2) :: thefile
        real, parameter :: pi = 4.0*atan(1.0)
        integer :: reps,i,isave
-       real :: tic,toc
+       real :: tic,toc,cit,cot
        character(14) :: title
        character(15) :: ftitle
 !      Input keys
@@ -15,6 +15,7 @@
        character(len=2) :: zpoints, ypoints, xpoints
        character(len=2) :: layer, steps, Rich, Roinv
 !
+        call cpu_time(cit)
         call MPI_INIT(ierr)
         call errcheck
 
@@ -103,19 +104,19 @@
 !       isave = approximate scaled time between snapshots
        isave = 1
 !       reps = approximate scaled time of simulation
-       reps  = ceiling(reps*2.5*Nz)
-       isave = ceiling(isave*2.5*Nz)
+       reps  = ceiling(reps*5.0*Nz)
+       isave = ceiling(isave*5.0*Nz)
        ! Create all the working arrays
        call startthreed(thefile,Re,Ri,Pr,invRo,Nx,Ny,Nz)
-       call initdertest(1,2,3)
+!       call initdertest(1,2,3)
        call cordwrite(thefile)
-       call stepwrite(thefile)
-       call dertestXX()
-       call stepwrite(thefile)
-       call dertestYY()
-       call stepwrite(thefile)
-       call dertestZZ()
-       call stepwrite(thefile)
+!       call stepwrite(thefile)
+!       call dertestXX()
+!       call stepwrite(thefile)
+!       call dertestYY()
+!       call stepwrite(thefile)
+!1       call dertestZZ()
+!       call stepwrite(thefile)
        call initialvals(hinv)
        call stepwrite(thefile)
        call cpu_time(tic)
@@ -127,6 +128,7 @@
        end do
        call cpu_time(toc)
        call stepwrite(thefile)
-!       if(Nme.eq.0) print *, (toc-tic)/reps
        call endthreed
+       call cpu_time(cot)
+       if(Nme.eq.0) print *, Nx,Ny,Nz,reps,Ncpu,tic-cit,toc-cit,cot-cit
       endprogram

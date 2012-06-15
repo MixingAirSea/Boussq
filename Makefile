@@ -9,7 +9,7 @@
 FC          = mpif90
 #
 # Fortran Flags
-FFLAGS      = -ffree-form -fbounds-check -fdefault-real-8 -O2
+FFLAGS      = -ffree-form -fbounds-check -fdefault-real-8 -O5
 #
 # Local libraries
 #MYLOC = /usr

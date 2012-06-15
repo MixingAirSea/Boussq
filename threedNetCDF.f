@@ -362,7 +362,6 @@
 
 
         if(Nx.eq.1) then
-         print *, t
          Nt = Nt+1
          ncstat = NF90_PUT_VAR(ncid,varids(tv),t,start=[Nt])
          if(ncstat.ne.nf90_noerr) print *, trim(nf90_strerror(ncstat)), "saving t"

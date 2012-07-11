@@ -105,6 +105,9 @@
        isave = 1
 !       reps = approximate scaled time of simulation
        reps  = ceiling(reps*5.0*Nz)
+       if(reps<4) then
+        reps=4
+       endif
        isave = ceiling(isave*5.0*Nz)
        ! Create all the working arrays
        call startthreed(thefile,Re,Ri,Pr,invRo,Nx,Ny,Nz)

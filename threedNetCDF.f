@@ -26,7 +26,9 @@
 !        character(16) :: fulltitle
 !*    Append the .nc suffix to the file name
 !        fulltitle = trim(adjustl(title))//".nc"
-        ncstat = NF90_CREATE(trim(adjustl(title))//".nc",cmode=NF90_CLASSIC_MODEL,ncid=ncid)
+!        ncstat = NF90_CREATE(trim(adjustl(title))//".nc",cmode=NF90_CLASSIC_MODEL,ncid=ncid)
+!        ncstat = NF90_CREATE(trim(adjustl(title))//".nc",cmode=NF90_64BIT_OFFSET,ncid=ncid)
+        ncstat = NF90_CREATE(trim(adjustl(title))//".nc",cmode=NF90_HDF5,ncid=ncid)
         if(ncstat.ne.nf90_noerr) print *, trim(nf90_strerror(ncstat))
 
         ncstat = NF90_DEF_DIM(ncid,"Z",Nz,dimids(zd))

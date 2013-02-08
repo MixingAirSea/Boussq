@@ -1,0 +1,21 @@
+# lines starting with # are ignored
+#
+# ignore the ouput program binaries
+threedfluid
+# ignore any file ending in o or a
+*.[oa]
+# ignore modules
+*.mod
+# ignore editor backup files
+*.*~
+*~
+*.old
+# ignore netCDF files
+*.nc
+# ignore images
+*.png
+*.svg
+*.eps
+# ignore document directory
+doc/*
+testing/*

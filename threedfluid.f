@@ -36,7 +36,7 @@
        Nx = 64
        Ny = 64
        Nz = 64
-       reps = 360
+       reps = 4
        hinv = 1.0
        Ri = .25
        invRo = 0.0
@@ -108,7 +108,7 @@
        if(reps<4) then
         reps=4
        endif
-       isave = ceiling(isave*5.0*Nz)
+       isave = ceiling(isave*2.5*Nz)
        ! Create all the working arrays
        call startthreed(thefile,Re,Ri,Pr,invRo,Nx,Ny,Nz)
 !       call initdertest(1,2,3)

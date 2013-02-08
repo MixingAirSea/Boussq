@@ -2,6 +2,7 @@
 #
 # ignore the ouput program binaries
 threedfluid
+mainprofile
 # ignore any file ending in o or a
 *.[oa]
 # ignore modules

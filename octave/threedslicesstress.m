@@ -266,11 +266,17 @@
 
  fprintf(cblimsid,'set pm3d\n');
  fprintf(cblimsid,'set pm3d corners2color c1\n');
+%gnuplot> saw1(x,N) = N*x-floor(N*x)
+%gnuplot> saw2(x,N) = 1-(N*x-floor(N*x))
+
  fprintf(cblimsid,'set palette mode HSV\n');
  fprintf(cblimsid,'h(x)=.8*(.5-.5*sgn(x-.5)*(1-(1-2*x+sgn(x-.5))**2)**.25)\n');
- fprintf(cblimsid,'s(x)=.5*(1-sgn(x-.5))+.5*(1+sgn(x-.5))*2*(2-2*x)\n');
+% fprintf(cblimsid,'h(x)=.8*x\n');
+ fprintf(cblimsid,'s(x)=.75*(1-sgn(x-.5))+.5*(1+sgn(x-.5))*2*(2-2*x)\n');
  fprintf(cblimsid,'v(x)=s(1-x)\n');
- fprintf(cblimsid,'set palette function h(gray),s(gray),v(gray)\n');
+ fprintf(cblimsid,'saw2(x,N) = .5+.5*sqrt(N*x-floor(N*x))\n');
+ fprintf(cblimsid,'saw1(x,N) = .5+.5*sqrt(1-(N*x-floor(N*x)))\n');
+ fprintf(cblimsid,'set palette function h(gray),s(gray)*saw1(gray,12),v(gray)*saw2(gray,12)\n');
 
  fprintf(cblimsid,'unset surface\n');
  fprintf(cblimsid,'unset colorbox\n');
@@ -378,15 +384,14 @@
      endfor
    endfor
    if(wait!=0)
-   for fi=1:4
-    idxfile = [loc field(fi) 'list.html'];
-    idxid = fopen(idxfile,'a');
-    gifname = [ field(fi) '.gif'];
-    unix(['convert  -scale 768x768 -delay 24 -loop 0 ' loc field(fi) '*.png ' loc gifname]);
-    idxid = fopen(idxfile,'a');
-    fprintf(idxid,'<IMG SRC="%s">\n',gifname);
-    fclose(idxid);
-   endfor
+    for fi=1:4
+     idxfile = [loc field(fi) 'list.html'];
+     idxid = fopen(idxfile,'a');
+     typename = 'ogv';
+     unix(['/home/mhoecker/bin/pngmovie.sh  -v 2048 -l ' loc field(fi) ' -n ' loc field(fi) ' -t ' typename]);
+     fprintf(idxid,'<IMG SRC="%s">\n',[field(fi) '.' typename]);
+     fclose(idxid);
+    endfor
    endif
   endif
   pause(max([wait,1]))

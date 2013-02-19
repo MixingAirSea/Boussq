@@ -20,3 +20,10 @@ mainprofile
 # ignore document directory
 doc/*
 testing/*
+# ignore files grnrrated by autoconf
+*.in
+install-sh
+missing
+configure
+aclocal.m4
+autom4te.cache
